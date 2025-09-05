@@ -16,3 +16,4 @@ jobs:
       packages: write
       id-token: write
     uses: ./.github/workflows/releaser-helm-charts.yml
+    secrets: inherit
