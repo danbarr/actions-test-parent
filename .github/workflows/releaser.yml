@@ -1,0 +1,19 @@
+name: Release
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+
+  update-docs-website:
+    name: Trigger Docs Update
+    permissions: {}
+    uses: ./.github/workflows/update-docs-website.yml
+    with:
+      version: ${{ github.ref_name }}
+    secrets:
+      CHILD_REPO_DISPATCH_TOKEN: ${{ secrets.CHILD_REPO_DISPATCH_TOKEN }}
