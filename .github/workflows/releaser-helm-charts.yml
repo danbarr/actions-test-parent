@@ -1,19 +1,14 @@
-name: Release
+name: Publish Helm Charts
 on:
-  push:
-    tags:
-      - 'v*'
-
-permissions:
-  contents: write
+  workflow_call:
 
 jobs:
-
   update-docs-website:
     name: Trigger Docs Update
     permissions: {}
     uses: ./.github/workflows/update-docs-website.yml
     with:
-      version: ${{ github.ref_name }}
+      version:
+        'toolhive-operator-crds-${{ github.event.repository.updated_at }}'
     secrets:
       CHILD_REPO_DISPATCH_TOKEN: ${{ secrets.CHILD_REPO_DISPATCH_TOKEN }}
